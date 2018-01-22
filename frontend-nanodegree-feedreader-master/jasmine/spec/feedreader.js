@@ -19,23 +19,27 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-        function testURL(url){
-            it('each feed has URL and URL is not empty', function() {
-                expect(url).not.toBe(null);
-            });
-        }
-        for(var i = 0; i < allFeeds.length; i++){
-            testURL(allFeeds[i].url);
-        }
+        // function testURL(url){
+        //     it('each feed has URL and URL is not empty', function() {
+        //         expect(url).not.toBe(null);
+        //     });
+        // }
+        // for(var i = 0; i < allFeeds.length; i++){
+        //     testURL(allFeeds[i].url);
+        // }
+        it('url is not null & is defined', function() {
+        	for(var i = 0; i < allFeeds.length; i++){
+        		expect(allFeeds[i].url).toBeDefined();
+        		expect(allFeeds[i].url).not.toBe(0);
+        	}
+        });
 
-        function testName(name){
-            it('each feed has name and name is not empty', function() {
-                expect(name).not.toBe(null);
-            });
-        }
-        for(var j = 0; j < allFeeds.length; j++){
-            testName(allFeeds[j].name);
-        }
+        it('name is not null & is defined', function() {
+        	for(var j = 0; j < allFeeds.length; j++){
+        		expect(allFeeds[j].name).toBeDefined();
+        		expect(allFeeds[j].name).not.toBe(0);
+        	}
+        });
     });
 
 
@@ -43,9 +47,8 @@ $(function() {
     describe('The menu', function() {
 
         it('should be hidden by default', function() {
-            var offScreen = $(".menu-hidden").css('transform');
-
-            expect(offScreen).toBe("none");
+            var offScreen = $("body").hasClass('menu-hidden');
+            expect(offScreen).toBe(true);
         });
 
         it('should change when clicked', function() {
@@ -63,7 +66,8 @@ $(function() {
          });
 
          it('should have at least a single .entry element within .feed container', function(done){
-            expect($('.feed').length).not.toBe(0);
+            var children = $('.feed').children();
+            expect(children).not.toBe(0);
             done();
          });
     });
